@@ -1,0 +1,7 @@
+venv/
+
+.dockerignore
+.env
+
+main.tf
+secrets.tfvars
