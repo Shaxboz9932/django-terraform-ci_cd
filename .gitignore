@@ -8,3 +8,4 @@ main.tf
 secrets.tfvars
 terraform.tfstate
 terraform.tfstate.backup
+.dockerignore
