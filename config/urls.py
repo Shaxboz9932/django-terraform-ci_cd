@@ -19,7 +19,7 @@ from django.urls import path
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse("<h3>Successful</h3>")
+    return HttpResponse("<h3>Successful!</h3>")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
