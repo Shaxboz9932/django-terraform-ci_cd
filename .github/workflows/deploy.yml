@@ -1,48 +1,42 @@
-name: CI/CD to Render.com
+name: CI/CD to render.com
 
 on:
   push:
     branches:
       - main
-
+      
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    
     steps:
-      # Checkout repo
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
-
-      # Setup Python (agar backend test qilish kerak bo‘lsa)
-      - name: Setup Python
+        
+      - name: Setup python
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-
-      # Install dependencies
+          
       - name: Install Dependencies
         run: |
           pip install -r requirements.txt
-
-      # Build Docker image
-      - name: Build Docker Image
+      
+      - name: Build Docker image
         run: |
           docker build -t ghcr.io/shaxboz9932/app-image .
-
-      # Login to GitHub Packages / Registry
-      - name: Login to GitHub Container Registry
+          
+      - name: Github Login with Docker
         uses: docker/login-action@v2
         with:
           username: ${{ shaxboz9932 }}
-          password: ${{ secrets.GHCR_PAT }}  # yoki PAT bo‘lsa secrets.MY_PAT
-
-      # Push Docker image to GitHub Packages
-      - name: Push Docker Image
+          password: ${{ secrets.GHCR_PAT }}
+          
+      - name: Push a Docker image
         run: |
           docker push ghcr.io/shaxboz9932/app-image:latest
-
-      # Trigger Render deployment
+          
       - name: re-Deploy to Render.Com
         run: |
           curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+          
