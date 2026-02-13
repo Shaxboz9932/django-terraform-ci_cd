@@ -3,7 +3,7 @@ venv/
 
 .env
 .terraform.lock.hcl
-entrypoint.sh
+
 main.tf
 secrets.tfvars
 terraform.tfstate
